@@ -1,0 +1,8 @@
+<mvc:View
+ controllerName="sap.typescript.cf.portal.controller.Main"
+ xmlns:mvc="sap.ui.core.mvc"
+ xmlns="sap.m">
+
+    <Text text="hello World" />
+</mvc:View>
+        

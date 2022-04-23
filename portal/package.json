@@ -1,0 +1,46 @@
+{
+  "name": "portal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run clean && npm run build:ts && npm run build:ui5 && npm run zip",
+    "clean": "npx rimraf portal-content.zip dist",
+    "build:ts": "npx rimraf webapp && babel src --out-dir webapp --source-maps true --extensions \".ts,.js\" --copy-files",
+    "build:ui5": "ui5 build --include-task=generateManifestBundle generateCachebusterInfo",
+    "zip": "cd dist && npx bestzip ../portal-content.zip *",
+    "start:dev": "npm-run-all --parallel watch:ts start:ui5",
+    "watch:ts": "babel src --out-dir webapp --source-maps true --extensions \".ts,.js\" --copy-files --watch",
+    "start:ui5": "ui5 serve --port 8080 -o index.html",
+    "ts-typeCheck": "tsc --noEmit",
+    "lint": "eslint src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.9",
+    "@babel/plugin-transform-async-to-generator": "^7.16.8",
+    "@babel/preset-typescript": "^7.16.7",
+    "@sap/ui5-builder-webide-extension": "^1.1.8",
+    "@sapui5/ts-types": "^1.101.0",
+    "@sapui5/ts-types-esm": "^1.101.0",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "@ui5/cli": "^2.14.8",
+    "babel-preset-transform-ui5": "^7.0.5",
+    "bestzip": "^2.2.1",
+    "eslint": "^8.13.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.6.3",
+    "ui5-middleware-livereload": "^0.5.11"
+  },
+  "ui5": {
+    "dependencies": [
+      "@sap/ui5-builder-webide-extension",
+      "ui5-middleware-livereload"
+    ]
+  }
+}
